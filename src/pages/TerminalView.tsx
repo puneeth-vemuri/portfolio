@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import ProfileCard from "@/components/ProfileCard";
 import * as THREE from "three";
 import { portfolioData } from "@/data/portfolio";
+import profilePic from "@/assets/profile-picture.jpeg";
 
 function TerminalView() {
   const navigate = useNavigate();
@@ -298,7 +299,7 @@ function TerminalView() {
         texture.needsUpdate = true;
       };
 
-      profileImage.src = "/src/assets/profile-picture.jpeg";
+      profileImage.src = profilePic;
 
       const backCanvas = document.createElement("canvas");
       backCanvas.width = 600;

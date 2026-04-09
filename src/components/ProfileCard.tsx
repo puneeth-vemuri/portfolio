@@ -1,5 +1,5 @@
 import { portfolioData } from "@/data/portfolio";
-import profilePicture from "@/assets/profile-picture.jpg";
+import profilePicture from "@/assets/profile-picture.jpeg";
 
 type ProfileCardProps = {
   variant?: "static" | "3d";
