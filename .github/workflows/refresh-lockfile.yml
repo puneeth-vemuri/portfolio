@@ -6,6 +6,7 @@ on:
       - audit/security-seo-baseline
     paths:
       - .github/workflows/refresh-lockfile.yml
+      - package.json
 
 permissions:
   contents: write
@@ -36,6 +37,10 @@ jobs:
         run: npm run lint
       - name: Production build
         run: npm run build
+      - name: Report remaining dependency advisories
+        run: |
+          npm audit --json > audit-report.json || true
+          node -e 'const a=require("./audit-report.json"); for (const [name,v] of Object.entries(a.vulnerabilities || {})) console.log(`${v.severity}: ${name} (${v.range})`); console.log(JSON.stringify(a.metadata?.vulnerabilities || {}))'
       - name: Dependency audit
         run: npm audit --audit-level=high
       - name: Commit refreshed lockfile
