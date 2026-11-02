@@ -24,9 +24,11 @@ jobs:
         with:
           node-version: 22
           cache: npm
-      - name: Install current dependencies
+      - name: Regenerate lockfile for safe dependency overrides
+        run: npm install --package-lock-only
+      - name: Install dependencies
         run: npm ci
-      - name: Apply non-breaking security updates
+      - name: Apply remaining compatible security updates
         run: npm audit fix
       - name: Verify refreshed lockfile install
         run: npm ci
@@ -46,5 +48,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add package-lock.json
-          git commit -m "chore: refresh vulnerable dependency versions"
+          git commit -m "chore: apply compatible dependency security updates"
           git push origin HEAD:audit/security-seo-baseline
