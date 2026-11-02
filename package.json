@@ -85,6 +85,9 @@
     "vite": "^5.4.19"
   },
   "overrides": {
-    "@grpc/grpc-js": "^1.14.7"
+    "@grpc/grpc-js": "^1.14.7",
+    "esbuild": "^0.25.12",
+    "minimatch": "^11.0.1",
+    "postcss-selector-parser": "^6.1.5"
   }
 }
