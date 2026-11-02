@@ -17,10 +17,10 @@ function TerminalView() {
     const terminalWrap = document.getElementById("terminal");
     if (!terminalOutput || !terminalInput || !container || !terminalWrap) return;
 
-    let scene: THREE.Scene | undefined;
-    let camera: THREE.PerspectiveCamera | undefined;
-    let renderer: THREE.WebGLRenderer | undefined;
-    let card: THREE.Mesh | undefined;
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    
     let animationId = 0;
     let targetRotationX = 0;
     let targetRotationY = 0;
@@ -75,7 +75,7 @@ function TerminalView() {
       },
     };
 
-    let commandHistory: string[] = [];
+    const commandHistory: string[] = [];
     let historyIndex = -1;
     let isCommandExecuting = false;
     const commandQueue: string[] = [];
@@ -178,10 +178,7 @@ function TerminalView() {
     };
     terminalWrap.addEventListener("click", onTerminalClick);
 
-    scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
     camera.position.z = 5.5;
-    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(container.clientWidth, container.clientHeight);
     container.appendChild(renderer.domElement);
@@ -250,7 +247,7 @@ function TerminalView() {
       new THREE.MeshBasicMaterial({ map: texture }),
       new THREE.MeshBasicMaterial({ map: backTexture }),
     ];
-    card = new THREE.Mesh(geometry, materials);
+    const card = new THREE.Mesh(geometry, materials);
     scene.add(card);
 
     let rotationX = 0;
