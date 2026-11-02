@@ -80,15 +80,15 @@ const SilkPlane = forwardRef<Mesh, SilkPlaneProps>(function SilkPlane({ uniforms
   useLayoutEffect(() => {
     // @ts-expect-error Three.js ref is narrowed by the runtime ref shape.
     if (ref && "current" in ref && ref.current) {
-        // @ts-ignore
+        // @ts-expect-error Three.js ref is narrowed by the runtime ref shape.
       ref.current.scale.set(viewport.width, viewport.height, 1);
     }
   }, [ref, viewport]);
 
   useFrame((_, delta) => {
-    // @ts-ignore
+    // @ts-expect-error Three.js ref is narrowed by the runtime ref shape.
     if (ref && "current" in ref && ref.current && ref.current.material) {
-        // @ts-ignore
+        // @ts-expect-error Three.js ref is narrowed by the runtime ref shape.
         ref.current.material.uniforms.uTime.value += 0.1 * delta;
     }
   });
