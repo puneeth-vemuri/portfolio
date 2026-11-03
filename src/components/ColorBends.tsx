@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unknown-property */
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { forwardRef, useRef, useMemo, useLayoutEffect } from "react";
 import { Color, Mesh, ShaderMaterial } from "three";
@@ -70,6 +69,8 @@ void main() {
 `;
 
 type SilkPlaneProps = {
+  // Shader uniforms are passed to Three.js and typed at runtime by the shader.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   uniforms: Record<string, any>;
 };
 
@@ -77,17 +78,17 @@ const SilkPlane = forwardRef<Mesh, SilkPlaneProps>(function SilkPlane({ uniforms
   const { viewport } = useThree();
 
   useLayoutEffect(() => {
-    // @ts-ignore
+    // @ts-expect-error Three.js ref is narrowed by the runtime ref shape.
     if (ref && "current" in ref && ref.current) {
-        // @ts-ignore
+        // @ts-expect-error Three.js ref is narrowed by the runtime ref shape.
       ref.current.scale.set(viewport.width, viewport.height, 1);
     }
   }, [ref, viewport]);
 
   useFrame((_, delta) => {
-    // @ts-ignore
+    // @ts-expect-error Three.js ref is narrowed by the runtime ref shape.
     if (ref && "current" in ref && ref.current && ref.current.material) {
-        // @ts-ignore
+        // @ts-expect-error Three.js ref is narrowed by the runtime ref shape.
         ref.current.material.uniforms.uTime.value += 0.1 * delta;
     }
   });

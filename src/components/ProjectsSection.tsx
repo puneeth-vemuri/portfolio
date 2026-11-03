@@ -228,7 +228,7 @@ function ProjectBadge({ isActive }: { isActive: boolean }) {
   );
 }
 
-function ProjectRow({ project, isOpen, onToggle }: { project: any; isOpen: boolean; onToggle: () => void }) {
+function ProjectRow({ project, isOpen, onToggle }: { project: (typeof portfolioData.projects)[number]; isOpen: boolean; onToggle: () => void }) {
   const [isHovered, setIsHovered] = useState(false);
 
   const hoverShadow = "0 0 18px rgba(248,113,113,0.28)";
